@@ -1,7 +1,18 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+d1 = Deliveryman::create(name: 'Cololo')
+d2 = Deliveryman::create(name: 'Gabriel')
+d3 = Deliveryman::create(name: 'Sandrinho')
+Deliveryman::create(name: 'Emmanuel')
+Deliveryman::create(name: 'Julio')
+Deliveryman::create(name: 'Alan')
+Deliveryman::create(name: 'Ariudson')
+Deliveryman::create(name: 'Edson')
+Deliveryman::create(name: 'George')
+Deliveryman::create(name: 'Matheus')
+Deliveryman::create(name: 'Pedro Lucas')
+Deliveryman::create(name: 'João Vitor')
+Deliveryman::create(name: 'Jerferson')
+Deliveryman::create(name: 'Gabril Coelho')
+
+Sale::create(value: 1200, charge: 200, deliveryman_id: d1.id, payment_method: 'credit_card')
+Sale::create(value: 1000, charge: 200, deliveryman_id: d2.id, payment_method: 'cash')
+Sale::create(value: 900, charge: 200, deliveryman_id: d3.id, payment_method: 'cash')
