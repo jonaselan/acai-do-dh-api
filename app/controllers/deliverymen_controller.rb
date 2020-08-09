@@ -3,7 +3,7 @@ class DeliverymenController < ApplicationController
 
   # GET /deliverymen
   def index
-    @deliverymen = Deliveryman.all
+    @deliverymen = Deliveryman.order(name: :asc)
 
     render json: @deliverymen
   end
