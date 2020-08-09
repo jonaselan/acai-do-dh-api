@@ -3,5 +3,5 @@ class Sale < ApplicationRecord
   enum delivery_method: { delivery: 'delivery', in_store: 'in_store' }
 
 
-  belongs_to :deliveryman
+  belongs_to :deliveryman, optional: true
 end
