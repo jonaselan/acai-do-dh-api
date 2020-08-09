@@ -49,6 +49,8 @@ class SalesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def sale_params
-      params.require(:sale).permit(:value, :change, :payment_method)
+      params
+        .require(:sale)
+        .permit(:value, :charge, :payment_method, :deliveryman_id, :delivery_method, :delivery_fee)
     end
 end
