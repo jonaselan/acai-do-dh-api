@@ -4,9 +4,9 @@ class SalesController < ApplicationController
   # GET /sales
   def index
     page = [(params[:page] || 1).to_i, 1].max
-    per_page = params[:per_page].present? ? params[:per_page].to_i : 20
+    per_page = params[:per_page].present? ? params[:per_page].to_i : 8
 
-    @sales = Sale.all.offset((page - 1) * per_page).limit(per_page)
+    @sales = Sale.order(created_at: :desc).offset((page - 1) * per_page).limit(per_page)
 
     render json: @sales
   end
