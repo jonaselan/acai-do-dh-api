@@ -13,7 +13,7 @@ class SalesController < ApplicationController
 
   # GET /sales/1
   def show
-    render json: @sale
+    render json: @sale.as_json(include: :deliveryman)
   end
 
   # POST /sales
