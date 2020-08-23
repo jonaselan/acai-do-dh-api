@@ -13,6 +13,9 @@ Deliveryman::create(name: 'João Vitor')
 Deliveryman::create(name: 'Jerferson')
 Deliveryman::create(name: 'Gabril Coelho')
 
-Sale::create(value: 12.00, charge: 0, payment_method: 'credit_card', delivery_method: 'local')
+Sale::create(value: 12.00, charge: 0, payment_method: 'credit_card', delivery_method: 'in_store')
 Sale::create(value: 10.00, charge: 5.00, delivery_fee: 3.00, deliveryman_id: d2.id, payment_method: 'cash', delivery_method: 'delivery')
 Sale::create(value: 2.50, charge: 10.00, delivery_fee: 3.00, deliveryman_id: d3.id, payment_method: 'cash', delivery_method: 'delivery')
+
+Expense::create(value: 12.00, kind: 'acai')
+Expense::create(value: 42.00, kind: 'gasolina')
