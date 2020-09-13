@@ -8,7 +8,7 @@ class SalesController < ApplicationController
 
     @sales = Sale.order(created_at: :desc).offset((page - 1) * per_page).limit(per_page)
 
-    render json: @sales
+    render json: @sales.as_json(include: :deliveryman)
   end
 
   # GET /sales/1
