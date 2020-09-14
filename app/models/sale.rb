@@ -10,4 +10,8 @@ class Sale < ApplicationRecord
     .offset((page - 1) * per_page)
     .limit(per_page)
   }
+
+  before_validation do
+    self.paid = true if self.in_store?
+  end
 end

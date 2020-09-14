@@ -7,6 +7,7 @@ class CreateSales < ActiveRecord::Migration[6.0]
       t.string :payment_method
       t.string :delivery_method
       t.decimal :delivery_fee, precision: 5, scale: 2
+      t.boolean :paid, default: false
 
       t.timestamps
     end

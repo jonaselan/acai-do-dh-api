@@ -43,10 +43,17 @@ class DeliverymenController < ApplicationController
     per_page = params[:per_page].present? ? params[:per_page].to_i : 8
 
     sales = Sale
-    .where(deliveryman_id: params[:deliveryman_id])
-    .make_today(page, per_page)
+      .where(paid: false)
+      .where(deliveryman_id: params[:deliveryman_id])
+      .make_today(page, per_page)
 
-    render json: sales
+    render json: {
+      sales: sales,
+      data: {
+        sale_count: sales.size,
+        sale_amount: sales.sum(:delivery_fee)
+      }
+    }
   end
 
   private
