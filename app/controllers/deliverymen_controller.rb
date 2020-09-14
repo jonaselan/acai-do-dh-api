@@ -38,6 +38,17 @@ class DeliverymenController < ApplicationController
     @deliveryman.destroy
   end
 
+  def sales
+    page = [(params[:page] || 1).to_i, 1].max
+    per_page = params[:per_page].present? ? params[:per_page].to_i : 8
+
+    sales = Sale
+    .where(deliveryman_id: params[:deliveryman_id])
+    .make_today(page, per_page)
+
+    render json: sales
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_deliveryman
