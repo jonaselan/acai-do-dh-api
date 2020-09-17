@@ -36,6 +36,12 @@ class SalesController < ApplicationController
     end
   end
 
+  def bunch_update
+    sales = Sale.where(id: params[:ids]).update(paid: true)
+
+    render json: sales
+  end
+
   # DELETE /sales/1
   def destroy
     @sale.destroy
