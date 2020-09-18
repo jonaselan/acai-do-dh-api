@@ -5,7 +5,7 @@ class Sale < ApplicationRecord
   belongs_to :deliveryman, optional: true
 
   scope :make_today, -> (page, per_page) {
-    where('created_at >= ?', Time.now.advance(hours: -3).beginning_of_day)
+    where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
     .order(created_at: :desc)
     .offset((page - 1) * per_page)
     .limit(per_page)
