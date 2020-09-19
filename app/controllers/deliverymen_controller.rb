@@ -39,19 +39,22 @@ class DeliverymenController < ApplicationController
   end
 
   def sales
-    page = [(params[:page] || 1).to_i, 1].max
-    per_page = params[:per_page].present? ? params[:per_page].to_i : 8
+    # page = [(params[:page] || 1).to_i, 1].max
+    # per_page = params[:per_page].present? ? params[:per_page].to_i : 8
+    # day = Time.strptime(params[:day], "%Y-%m-%d") || Time.now
 
     sales = Sale
-      .where(paid: false)
       .where(deliveryman_id: params[:deliveryman_id])
-      .make_today(page, per_page)
+      .paginate(params[:page], params[:per_page])
+      .by_day(params[:day])
 
     render json: {
       sales: sales,
       info: {
-        sales_count: sales.size,
-        sales_amount: sales.sum(:delivery_fee)
+        sales_count_total: sales.size,
+        sales_amount_total: sales.sum(:delivery_fee),
+        sales_count: sales.where(paid: false).size,
+        sales_amount: sales.where(paid: false).sum(:delivery_fee)
       }
     }
   end

@@ -3,10 +3,13 @@ class SalesController < ApplicationController
 
   # GET /sales
   def index
-    page = [(params[:page] || 1).to_i, 1].max
-    per_page = params[:per_page].present? ? params[:per_page].to_i : 8
+    # page = [(params[:page] || 1).to_i, 1].max
+    # per_page = params[:per_page].present? ? params[:per_page].to_i : 8
+    # day = Time.strptime(params[:day], "%Y-%m-%d") || Time.now
 
-    @sales = Sale.make_today(page, per_page)
+    @sales = Sale
+      .paginate(params[:page], params[:per_page])
+      .by_day(params[:day])
 
     render json: @sales.as_json(include: :deliveryman)
   end
@@ -57,6 +60,7 @@ class SalesController < ApplicationController
     def sale_params
       params
         .require(:sale)
-        .permit(:value, :charge, :payment_method, :deliveryman_id, :delivery_method, :delivery_fee)
+        .permit(:value, :charge, :payment_method, :deliveryman_id,
+                :delivery_method, :delivery_fee, :paid, :receiver)
     end
 end
