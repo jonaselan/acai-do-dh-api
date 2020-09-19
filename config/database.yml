@@ -5,18 +5,10 @@ default: &default
 
 development:
   <<: *default
-  database: 'acaidh'
-  host: '127.0.0.1'
-  username: 'root'
-  password: '123456'
-  port: 5432
-
-test:
-  <<: *default
-  database: <%= ENV['DB_DATABASE_TEST'] %>
-  host: <%= ENV['DB_HOST_TEST'] %>
-  username: <%= ENV['DB_USERNAME_TEST'] %>
-  password: <%= ENV['DB_PASSWORD_TEST'] %>
+  database: <%= ENV['DB_DATABASE'] %>
+  host: <%= ENV['DB_HOST'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
   port: 5432
 
 production:
