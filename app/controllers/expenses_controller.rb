@@ -8,7 +8,12 @@ class ExpensesController < ApplicationController
 
     @expenses = Expense.order(created_at: :desc).offset((page - 1) * per_page).limit(per_page)
 
-    render json: @expenses
+    render json: {
+      expenses: @expenses,
+      info: {
+        debit: @expenses.sum(:value)
+      }
+    }
   end
 
   # GET /expenses/1

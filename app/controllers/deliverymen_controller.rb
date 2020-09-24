@@ -39,10 +39,6 @@ class DeliverymenController < ApplicationController
   end
 
   def sales
-    # page = [(params[:page] || 1).to_i, 1].max
-    # per_page = params[:per_page].present? ? params[:per_page].to_i : 8
-    # day = Time.strptime(params[:day], "%Y-%m-%d") || Time.now
-
     sales = Sale
       .where(deliveryman_id: params[:deliveryman_id])
       .paginate(params[:page], params[:per_page])

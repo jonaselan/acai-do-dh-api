@@ -4,16 +4,6 @@ class Sale < ApplicationRecord
 
   belongs_to :deliveryman, optional: true
 
-  # scope :by_day, -> (day) {
-  #   where(created_at: day.beginning_of_day..day.end_of_day)
-  # }
-
-  # scope :paginate, -> (page, per_page) {
-  #   offset((page - 1) * per_page)
-  #   .limit(per_page)
-  #   .order(created_at: :desc)
-  # }
-
   before_validation do
     if self.in_store?
       self.paid = true

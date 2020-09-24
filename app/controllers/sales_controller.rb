@@ -3,15 +3,17 @@ class SalesController < ApplicationController
 
   # GET /sales
   def index
-    # page = [(params[:page] || 1).to_i, 1].max
-    # per_page = params[:per_page].present? ? params[:per_page].to_i : 8
-    # day = Time.strptime(params[:day], "%Y-%m-%d") || Time.now
-
     @sales = Sale
       .paginate(params[:page], params[:per_page])
       .by_day(params[:day])
 
-    render json: @sales.as_json(include: :deliveryman)
+    render json: {
+      sales: @sales.as_json(include: :deliveryman),
+      info: {
+        credit: @sales.sum(:value),
+        quantity: @sales.size
+      }
+    }
   end
 
   # GET /sales/1
