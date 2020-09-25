@@ -8,6 +8,14 @@ class DeliverymenController < ApplicationController
     render json: @deliverymen
   end
 
+  def with_filters
+    @deliverymen = Deliveryman
+      .by_day_sales(params[:day])
+      .order(name: :asc)
+
+    render json: @deliverymen
+  end
+
   # GET /deliverymen/1
   def show
     render json: @deliveryman

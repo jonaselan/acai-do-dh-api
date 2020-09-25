@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   end
   resources :deliverymen do
     get :sales
-    # patch :sales
+    collection do
+      get :with_filters
+    end
   end
 end
