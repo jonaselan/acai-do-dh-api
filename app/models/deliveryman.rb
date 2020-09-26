@@ -5,6 +5,7 @@ class Deliveryman < ApplicationRecord
     day = day ? Time.strptime(day, '%Y-%m-%d') : Time.now
 
     joins(:sales)
+    .select('distinct(deliverymen.name), deliverymen.id')
     .where('sales.created_at BETWEEN ? and ?', day.beginning_of_day, day.end_of_day)
   end
 end
