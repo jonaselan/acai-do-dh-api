@@ -1,7 +1,7 @@
 class Expense < ApplicationRecord
   def self.paginate(page, per_page)
     page = [(page || 1).to_i, 1].max
-    per_page = per_page.present? ? per_page.to_i : 8
+    per_page = per_page.present? ? per_page.to_i : 60
 
     offset((page - 1) * per_page)
     .limit(per_page)
