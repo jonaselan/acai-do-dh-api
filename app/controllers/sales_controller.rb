@@ -7,6 +7,10 @@ class SalesController < ApplicationController
       .paginate(params[:page], params[:per_page])
       .by_day(params[:day])
 
+    if params[:payment_method]
+      @sales = @sales.by_payment_method(params[:payment_method])
+    end
+
     render json: {
       sales: @sales.as_json(include: :deliveryman),
       info: {

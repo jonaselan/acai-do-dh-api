@@ -25,4 +25,10 @@ class Sale < ApplicationRecord
 
     where(created_at: day.beginning_of_day..day.end_of_day)
   end
+
+  def self.by_payment_method(kind)
+    if kind
+      where(payment_method: kind)
+    end
+  end
 end
