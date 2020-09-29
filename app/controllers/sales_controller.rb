@@ -5,7 +5,7 @@ class SalesController < ApplicationController
   def index
     @sales = Sale.by_day(params[:day])
 
-    if params[:payment_method]
+    unless params[:payment_method].blank?
       @sales = @sales.by_payment_method(params[:payment_method])
     end
 
