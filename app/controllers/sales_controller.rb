@@ -3,14 +3,14 @@ class SalesController < ApplicationController
 
   # GET /sales
   def index
-    @sales = Sale.paginate(params[:page], params[:per_page]).by_day(params[:day])
+    @sales = Sale.by_day(params[:day])
 
     if params[:payment_method]
       @sales = @sales.by_payment_method(params[:payment_method])
     end
 
     render json: {
-      sales: @sales.as_json(include: :deliveryman),
+      sales: @sales.paginate(params[:page], params[:per_page]).as_json(include: :deliveryman),
       info: {
         credit: @sales.sum(:value),
         quantity: @sales.size
