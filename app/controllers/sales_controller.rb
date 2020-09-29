@@ -9,8 +9,12 @@ class SalesController < ApplicationController
       @sales = @sales.by_payment_method(params[:payment_method])
     end
 
+    sales = @sales
+      .includes(:deliveryman)
+      .paginate(params[:page], params[:per_page])
+
     render json: {
-      sales: @sales.paginate(params[:page], params[:per_page]).as_json(include: :deliveryman),
+      sales: sales.as_json(include: :deliveryman),
       info: {
         credit: @sales.sum(:value),
         quantity: @sales.size
