@@ -13,7 +13,12 @@ class DeliverymenController < ApplicationController
       .by_day_sales(params[:day])
       .order(name: :asc)
 
-    render json: @deliverymen
+    sales = Sale.by_day(params[:day])
+
+    render json: {
+      deliverymen: @deliverymen,
+      sales_amount_total: sales.sum(:delivery_fee)
+    }
   end
 
   # GET /deliverymen/1
@@ -64,13 +69,14 @@ class DeliverymenController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_deliveryman
-      @deliveryman = Deliveryman.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def deliveryman_params
-      params.require(:deliveryman).permit(:name, :avatar)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_deliveryman
+    @deliveryman = Deliveryman.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def deliveryman_params
+    params.require(:deliveryman).permit(:name, :avatar)
+  end
 end
