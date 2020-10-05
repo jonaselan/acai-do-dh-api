@@ -27,3 +27,5 @@ db/schema.rb
 
 # redis
 dump.rdb
+
+node_modules
