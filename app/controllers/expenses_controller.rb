@@ -53,6 +53,6 @@ class ExpensesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def expense_params
-      params.require(:expense).permit(:value, :kind, :description)
+      params.require(:expense).permit(:value, :kind, :description, :created_at)
     end
 end
