@@ -69,6 +69,6 @@ class SalesController < ApplicationController
       params
         .require(:sale)
         .permit(:value, :charge, :payment_method, :deliveryman_id,
-                :delivery_method, :delivery_fee, :paid, :receiver)
+                :delivery_method, :delivery_fee, :paid, :receiver, :created_at)
     end
 end
