@@ -13,10 +13,14 @@ class SalesController < ApplicationController
       .includes(:deliveryman)
       .paginate(params[:page], params[:per_page])
 
+    sub_total = @sales.sum(:value)
+    total = sub_total - @sales.sum(:delivery_fee)
+
     render json: {
       sales: sales.as_json(include: :deliveryman),
       info: {
-        credit: @sales.sum(:value),
+        total: total,
+        sub_total: sub_total,
         quantity: @sales.size
       }
     }
