@@ -11,4 +11,5 @@ Rails.application.routes.draw do
       get :with_filters
     end
   end
+  resources :statistics, only: ['index']
 end

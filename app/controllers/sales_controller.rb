@@ -19,7 +19,7 @@ class SalesController < ApplicationController
     render json: {
       sales: sales.as_json(include: :deliveryman),
       info: {
-        total: total,
+        credit: total,
         sub_total: sub_total,
         quantity: @sales.size
       }
