@@ -5,7 +5,7 @@ class ExpensesController < ApplicationController
   def index
     @expenses = Expense
       .paginate(params[:page], params[:per_page])
-      # .by_day(params[:day])
+      .by_day(params[:day])
 
     render json: {
       expenses: @expenses,
